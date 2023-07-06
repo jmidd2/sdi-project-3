@@ -17,10 +17,9 @@ const config = {
     password: process.env.PG_PASSWORD,
     database: process.env.PG_DATABASE,
   },
-
   seeds: {
-    directory: './seeds'
-  }
+    directory: './seeds',
+  },
 };
 
 export default config;
