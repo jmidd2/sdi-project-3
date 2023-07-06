@@ -1,13 +1,17 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import knex from 'knex';
+import config from '../knexfile.js';
 
+const db = knex(config);
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
+app.get('/', async (req, res) => {
+  const data = await db('games').select();
+  res.send(data);
 });
 
 app.post('/', (req, res) => {

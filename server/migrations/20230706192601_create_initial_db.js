@@ -4,6 +4,10 @@
  */
 export async function up(knex) {
   // return knex.schema
+  return knex.schema.createTable('test', table => {
+    table.increments('id');
+    table.string('name');
+  });
 }
 
 /**
