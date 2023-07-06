@@ -55,7 +55,7 @@
     ],
     "import/prefer-default-export": "warn",
     "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": "off",
     "arrow-parens": "off",
     "operator-linebreak": "off",
     "quotes": ["error", "single"],
