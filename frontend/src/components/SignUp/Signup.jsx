@@ -1,25 +1,33 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { appContext } from '../App/App';
 
 const SignUp = () => {
 
-    const handleSignup = () => {
+    const {setIsLoggedIn} = useContext(appContext)
+
+    const handleSignup = async () => {
         const un = document.getElementById('un').value
         const pw = document.getElementById('pw').value
-        console.log(un);
         // fetch backend with plaintext username and password
-        // let response = await fetch('http://localhost:3001/user/signup', {
-        //     method: "POST",
-        //     body: JSON.stringify({un, pw})
-        // });
-        // let data = await response.json();
-        // console.log(data);
-
-        fetch('http://localhost:3001/user/signup', {
+        let response = await fetch('http://localhost:3001/user/signup', {
             method: "POST",
-            body: JSON.stringify({un, pw})
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
+            body: JSON.stringify({un, pw}),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        let token = await response.json();
+        if (token) {
+            // store token in cookie
+            document.cookie = `username=${un}; max-age=3600`;
+            document.cookie = `token=${token}; max-age=3600`;
+            // set some state for logged in to true?
+            setIsLoggedIn(true)
+            // navigate to /home page
+            // .............
+        } else {
+            alert('User already exists')
+        }
     }
 
     return (

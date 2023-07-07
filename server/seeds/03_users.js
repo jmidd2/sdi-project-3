@@ -16,7 +16,7 @@ export const seed = async knex => {
     {
       id: 2,
       customer_id: 2,
-      username: 'Anna',
+      username: 'Vasyl',
       password: 'slavaukraini',
     },
   ]);

@@ -3,22 +3,31 @@ import jwt from 'jsonwebtoken';
 import { expressjwt } from 'express-jwt';
 import { v4 as uuid } from 'uuid';
 import db from '../db.js';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
-const generateAccessToken = (username, email) => {
+const generateAccessToken = username => {
   let admin = username === 'Jon M';
-  return jwt.sign(
-    { username, email, permissions: { admin } },
-    process.env.TOKEN_SECRET,
-    {
-      issuer: 'tankvana', // where was the JWT issued
-      subject: email, // the user of the JWT
-      audience: `${username} at tankvana`, // the intended recipient of the JWT
-      expiresIn: 1800,
-      jwtid: uuid(), // UUID of the JWT
-    }
-  );
+  let newUuid = uuid();
+  return {
+    token: jwt.sign(
+      { username, permissions: { admin } },
+      process.env.TOKEN_SECRET,
+      {
+        issuer: 'tankvana', // where was the JWT issued
+        subject: username, // the user of the JWT
+        audience: `${username} at tankvana`, // the intended recipient of the JWT
+        expiresIn: 1800,
+        jwtid: newUuid, // UUID of the JWT
+      }
+    ),
+    jwtid: newUuid,
+  };
+};
+
+const pwHash = pw => {
+  return bcrypt.hashSync(pw, 10);
 };
 
 // :3001/users/
@@ -39,10 +48,30 @@ router.get('/', async (req, res, next) => {
 //  insert new user
 //  generate token
 //  respond with token
-router.post('/signup', (req, res) => {
-  console.log('signup called');
-  console.log(req.body);
-  res.send(req.body);
+router.post('/signup', async (req, res) => {
+  let newUser =
+    (await db('users').select('*').where({ username: req.body.un })).length ===
+    0;
+  console.log(newUser);
+  if (newUser) {
+    let { token, jwtid } = generateAccessToken(req.body.un);
+    //db call to insert username and id...
+    let hash = pwHash(req.body.pw);
+    console.log('hash ', hash);
+    console.log('token ', token);
+    // bcrypt.hash(req.body.pw, 10, async (err, hash) => {
+      // await db('users').insert({
+      //   username: req.body.un,
+      //   password: hash,
+      //   issued_jwt_id: jwtid,
+      //   issued_jwt_expiration: '',
+    //   // });
+    // });
+    res.status(201).json(token);
+    
+  } else {
+    res.status(401).json(null);
+  }
 });
 
 // signin
