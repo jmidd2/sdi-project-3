@@ -2,17 +2,27 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import knex from 'knex';
 import config from '../knexfile.js';
-import tankInventoryRoute from './routes/tankInventoryRoute.js';
-import rentalsRoute from './routes/rentalsRoute.js';
-import customersRoute from './routes/customersRoute.js';
-import locationsRoute from './routes/locationsRoute.js'; 
-
+import {
+  tankInventoryRouter,
+  rentalRouter,
+  customerRouter,
+  locationRouter,
+  userRouter,
+} from './routes/index.js';
 
 const db = knex(config);
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use('/tank-inventory', tankInventoryRouter);
+app.use('/rentals', rentalRouter);
+app.use('/customers', customerRouter);
+app.use('/locations', locationRouter);
+app.use('/user', userRouter);
+// app.use('vehicle-loadouts');
+// app.use('weapon-inventory');
 
 app.get('/', async (req, res) => {
   const data = await db('test').select();
@@ -28,39 +38,6 @@ app.post('/', (req, res) => {
   res.sendStatus(400);
 });
 
-// app.get('/tank_inventory', (req, res) => {
-//   db('tank_inventory')
-//     .select('*')
-//     .then(tankvana_inventory => {
-//       res.json(tankvana_inventory);
-//     });
-// });
-
-// app.get('/rentals', (req, res) => {
-//   db('rentals')
-//     .select('*')
-//     .then(rentals => {
-//       res.json(rentals);
-//     });
-// });
-
-// app.get('/customers', (req, res) => {
-//   db('customers')
-//     .select('*')
-//     .then(customers => {
-//       res.json(customers);
-//     });
-// });
-
-// // app.get('/vehicle_loadouts', (req, res) => {
-// //   db('vehicle_loadouts')
-// //     .select('*')
-// //     // Since we will have so many routes I like to seperate them into files
-// //     .then(vehicle_loadouts => {
-// //       res.json(vehicle_loadouts);
-// //     });
-// // });
-
 // // app.get('/weapon_inventory', (req, res) => {
 // //   db('locations')
 // //     .select('*')
@@ -68,14 +45,6 @@ app.post('/', (req, res) => {
 // //       res.json(locations);
 // //     });
 // // });
-
-// app.get('/locations', (req, res) => {
-//   db('locations')
-//     .select('*')
-//     .then(locations => {
-//       res.json(locations);
-//     });
-// });
 
 
 // // app.get('/weapon_inventory', (req, res) => {
@@ -96,11 +65,5 @@ app.post('/', (req, res) => {
 // //       res.status(500).json({ message: 'An error occurred' });
 // //     });
 // // });
-
-app.use('tank_inventory', tank_InventoryRoute);
-app.use('/rentals', rentalsRoute);
-app.use('customers', customersRoute);
-app.use('locations', locationsRoute); 
-
 
 export default app;

@@ -1,8 +1,6 @@
 import express from 'express';
-import knex from 'knex';
-import config from '../knexfile.js';
+import db from '../db.js';
 
-const db = knex(config);
 const router = express.Router();
 
 router.get('/', (req, res) => {
