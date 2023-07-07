@@ -26,7 +26,7 @@ const SignIn = () => {
   return (
     <div style={{backgroundImage:`url(${background})`, backgroundSize: 'cover'}}>
       <Container className="bg-image d-flex flex-column justify-content-center align-items-center vh-100">
-        <Card className="mb-5 rounded bg-secondary">
+        <Card className="mb-5 rounded bg-secondary bg-white shadow-lg">
           <div className='row justify-content-center text-center'>
               <p className='col-6'>Login</p>
           </div>
