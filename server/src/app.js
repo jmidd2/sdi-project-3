@@ -1,5 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import 'dotenv/config';
+import db from './db.js';
 import {
   tankInventoryRouter,
   rentalRouter,
@@ -40,7 +42,6 @@ export default app;
 // //       res.json(locations);
 // //     });
 // // });
-
 
 // // app.get('/weapon_inventory', (req, res) => {
 // //   knex
