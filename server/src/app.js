@@ -1,7 +1,5 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import knex from 'knex';
-import config from '../knexfile.js';
 import {
   tankInventoryRouter,
   rentalRouter,
@@ -10,16 +8,11 @@ import {
   userRouter,
 } from './routes/index.js';
 
-const db = knex(config);
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/tank-inventory', tankInventoryRouter);
-app.use('/rentals', rentalRouter);
-app.use('/customers', customerRouter);
-app.use('/locations', locationRouter);
 app.use('/user', userRouter);
 // app.use('vehicle-loadouts');
 // app.use('weapon-inventory');
@@ -37,6 +30,8 @@ app.post('/', (req, res) => {
   }
   res.sendStatus(400);
 });
+
+export default app;
 
 // // app.get('/weapon_inventory', (req, res) => {
 // //   db('locations')
@@ -65,5 +60,3 @@ app.post('/', (req, res) => {
 // //       res.status(500).json({ message: 'An error occurred' });
 // //     });
 // // });
-
-export default app;
