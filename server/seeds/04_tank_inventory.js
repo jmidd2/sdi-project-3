@@ -9,7 +9,7 @@ export const seed = async knex => {
     {
       tank_id: 1,
       location_id: 1,
-      model: '',
+      model: 'M1A1',
       base_price: 10.0,
     },
   ]);
