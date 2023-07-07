@@ -5,7 +5,21 @@ const SignUp = () => {
     const handleSignup = () => {
         const un = document.getElementById('un').value
         const pw = document.getElementById('pw').value
+        console.log(un);
         // fetch backend with plaintext username and password
+        // let response = await fetch('http://localhost:3001/user/signup', {
+        //     method: "POST",
+        //     body: JSON.stringify({un, pw})
+        // });
+        // let data = await response.json();
+        // console.log(data);
+
+        fetch('http://localhost:3001/user/signup', {
+            method: "POST",
+            body: JSON.stringify({un, pw})
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
 
     return (

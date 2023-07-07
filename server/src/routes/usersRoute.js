@@ -39,6 +39,11 @@ router.get('/', async (req, res, next) => {
 //  insert new user
 //  generate token
 //  respond with token
+router.post('/signup', (req, res) => {
+  console.log('signup called');
+  console.log(req.body);
+  res.send(req.body);
+});
 
 // signin
 
