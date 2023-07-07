@@ -1,7 +1,7 @@
 import { jest, describe, expect, it, test } from '@jest/globals';
 import request from 'supertest';
 // const request = require("supertest");
-import app from './app';
+import app from './app.js';
 
 describe('Test the root path', () => {
   it('should response the GET method', async () => {

@@ -3,12 +3,28 @@
 /**
  * Module dependencies.
  */
+import http from 'node:http';
 import app from './app.js';
-import http from 'http';
 
 /**
  * Get port from environment and store in Express.
  */
+
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+
+  if (Number.isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
 
 const port = normalizePort(process.env.PORT || '3001');
 app.set('port', port);
@@ -30,22 +46,6 @@ server.listen(port, () => {
 
   console.log(`Server listening at http://${host}:${port}`);
 });
-
-function normalizePort(val) {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
 
 process.on('SIGTERM', () => {
   console.debug('SIGTERM signal received: closing HTTP server...');

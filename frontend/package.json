@@ -18,8 +18,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write ./src/**/*.{ts,tsx,css}",
-    "lint": "eslint './src/**/*.{js,jsx}'",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "npm run lint -- --fix"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
