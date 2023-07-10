@@ -100,13 +100,13 @@ const RentalDetails = () => {
 
         <button id="browse-button" type="submit">Browse Vehicle</button>
       </form>
-      {tanksLoaded?.length > 0 && (
+      {tanksLoaded?.length > 0 ? (
         <>
           {tanksLoaded.map(item => 
             <div key={item.tank_id}>{item.model}</div>
           )}
         </>
-      )}
+      ) : (<>No Vehicles Found</>)}
     </div>
   );
 };
