@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import { appContext } from '../App/App';
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
-
+    const navigate = useNavigate()
     const {setIsLoggedIn} = useContext(appContext)
 
     const handleSignup = async () => {
@@ -24,9 +25,9 @@ const SignUp = () => {
             // set some state for logged in to true?
             setIsLoggedIn(true)
             // navigate to /home page
-            // .............
+            navigate('/home')
         } else {
-            alert('User already exists')
+            alert('User already exists. Please return to login or try a new user.')
         }
     }
 

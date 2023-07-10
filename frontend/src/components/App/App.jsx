@@ -22,7 +22,7 @@ const App = () => {
         <Routes>  
           <Route path='/' element={<SignIn />}/>
           <Route path='/signup' element={<SignUp />}/>
-          <Route path='tanks' element={<div>Tanks Placeholder</div>}/>
+          <Route path='/tanks' element={<div>Tanks Placeholder</div>}/>
         </Routes>
       </Router>
     </appContext.Provider>

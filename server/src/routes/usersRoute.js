@@ -1,15 +1,22 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import { expressjwt } from 'express-jwt';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid, validate as validateUuid } from 'uuid';
 import db from '../db.js';
 import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
-const generateAccessToken = username => {
+/**
+ *
+ * @param {*} username
+ * @param {*} genUuid
+ * @param {*} prevUuid
+ * @returns { token: JWT, jwtid: UUID}
+ */
+const generateAccessToken = (username, genUuid = true, prevUuid) => {
   let admin = username === 'Jon M';
-  let newUuid = uuid();
+  let tokenUuid = genUuid ? uuid() : prevUuid;
   return {
     token: jwt.sign(
       { username, permissions: { admin } },
@@ -19,10 +26,10 @@ const generateAccessToken = username => {
         subject: username, // the user of the JWT
         audience: `${username} at tankvana`, // the intended recipient of the JWT
         expiresIn: 1800,
-        jwtid: newUuid, // UUID of the JWT
+        jwtid: tokenUuid, // UUID of the JWT
       }
     ),
-    jwtid: newUuid,
+    jwtid: tokenUuid,
   };
 };
 
@@ -34,7 +41,7 @@ const pwHash = pw => {
 router.get('/', async (req, res, next) => {
   try {
     let users = await db('users').select();
-    let token = generateAccessToken('Jon M', 'some@email.com');
+    let token = generateAccessToken('Jon M');
     res.send(token);
   } catch (e) {
     res.status(500);
@@ -60,21 +67,53 @@ router.post('/signup', async (req, res) => {
     console.log('hash ', hash);
     console.log('token ', token);
     // bcrypt.hash(req.body.pw, 10, async (err, hash) => {
-      // await db('users').insert({
-      //   username: req.body.un,
-      //   password: hash,
-      //   issued_jwt_id: jwtid,
-      //   issued_jwt_expiration: '',
+    // await db('users').insert({
+    //   username: req.body.un,
+    //   password: hash,
+    //   issued_jwt_id: jwtid,
+    //   issued_jwt_expiration: '',
     //   // });
     // });
     res.status(201).json(token);
-    
   } else {
     res.status(401).json(null);
   }
 });
 
-// signin
+// 3001/users/signin
+// - post
+// check db for user
+// check password
+// verify jwtid
+// send token
+router.post('/signin', async (req, res) => {
+  //req.body.pw
+  //req.body.un
+  let user = await db('users').where({ username: req.body.un }).first();
+  console.log(user);
+  if (user === undefined) {
+    res.status(404).send('Incorrect username');
+  } else {
+    bcrypt.compare(req.body.pw, user.password, async (err, valid) => {
+      if (valid) {
+        let token, jwtid;
+        if (user.issued_jwt_id && validateUuid(user.issued_jwt_id)) {
+          ({ token } = generateAccessToken(
+            req.body.un,
+            false,
+            user.issued_jwt_id
+          ));
+        } else {
+          ({ token, jwtid } = generateAccessToken(req.body.un));
+          await db('users').where({id: user.id}).update({issued_jwt_id: jwtid});
+        }
+        res.status(200).send(token);
+      } else {
+        res.status(401).send('Incorrect password');
+      }
+    });
+  }
+});
 
 router.get(
   '/protected',

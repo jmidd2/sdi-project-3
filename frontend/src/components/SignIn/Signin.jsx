@@ -9,7 +9,7 @@ const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setUsername(document.getElementById('un').value)
     setPassword(document.getElementById('pw').value)
     // fetch to backend with plaintext un and pw
