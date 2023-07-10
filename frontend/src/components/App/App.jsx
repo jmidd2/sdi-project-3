@@ -3,7 +3,7 @@ import './App.scss';
 import Header from '../Header/Header';
 import SignIn from '../SignIn/Signin';
 import SignUp from '../SignUp/Signup';
-import RentalDetails from '../RentalDetails';
+import RentalDetails from '../RentalDetails/RentalDetails';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 export const appContext = createContext()
