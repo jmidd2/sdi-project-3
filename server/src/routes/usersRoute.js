@@ -37,7 +37,7 @@ const pwHash = pw => {
   return bcrypt.hashSync(pw, 10);
 };
 
-// :3001/users/
+// :3001/user/
 router.get('/', async (req, res, next) => {
   try {
     let users = await db('users').select();
@@ -89,8 +89,13 @@ router.post('/signup', async (req, res) => {
 router.post('/signin', async (req, res) => {
   //req.body.pw
   //req.body.un
-  let user = await db('users').where({ username: req.body.un }).first();
-  console.log(user);
+
+  if (!req.body.un || !req.body.pw) {
+    return res.status(400).json('Username and password required');
+  }
+
+  let user = await db('users').where('username', req.body.un).first();
+
   if (user === undefined) {
     res.status(404).json('Incorrect username');
   } else {
@@ -105,7 +110,9 @@ router.post('/signin', async (req, res) => {
           ));
         } else {
           ({ token, jwtid } = generateAccessToken(req.body.un));
-          await db('users').where({id: user.id}).update({issued_jwt_id: jwtid});
+          await db('users')
+            .where({ id: user.id })
+            .update({ issued_jwt_id: jwtid });
         }
         res.status(200).json(token);
       } else {

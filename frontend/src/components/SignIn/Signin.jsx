@@ -21,12 +21,12 @@ const SignIn = () => {
   const handleLogin = async () => {
     // fetch to backend with plaintext un and pw
     let response = await fetch('http://localhost:3001/user/signin', {
-            method: "POST",
-            body: JSON.stringify({un: username.current.value, pw: password.current.value}),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        method: "POST",
+        body: JSON.stringify({un: username.current.value, pw: password.current.value}),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
     if (response.status !== 200) {
       let message = await response.json();
       alert(message);
@@ -55,10 +55,10 @@ const SignIn = () => {
         <Card className="mb-5 d-flex flex-column align-items-left rounded bg-secondary bg-white shadow-lg w-25 p-2 m-3">
           <h1 class="h3 mb-3 fw-normal">Please Sign In</h1>
           <div className='row justify-content-center form-floating mb-2 w-100 px-3'>
-              <input className='' type='text' placeholder='Username' id="un"/>
+              <input ref={username} className='' type='text' placeholder='Username' id="un"/>
           </div>
           <div className='row justify-content-center mb-2 w-100 px-3'>
-              <input className='mb-3' type='password' placeholder='Password' id="pw"/>
+              <input ref={password} className='mb-3' type='password' placeholder='Password' id="pw"/>
           </div>
           <div className='d-flex row justify-content-around'>
             <Button className='w-25 mh-100' variant="success" onClick={() => handleLogin()}>Log In</Button> {/* On click check un/pw against DB and set session data*/}
