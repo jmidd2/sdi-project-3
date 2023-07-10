@@ -3,6 +3,7 @@ import './App.scss';
 import Header from '../Header/Header';
 import SignIn from '../SignIn/Signin';
 import SignUp from '../SignUp/Signup';
+import RentalDetails from '../RentalDetails';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 export const appContext = createContext()
@@ -22,7 +23,7 @@ const App = () => {
         <Routes>  
           <Route path='/' element={<SignIn />}/>
           <Route path='/signup' element={<SignUp />}/>
-          <Route path='/rental-details' element={<div>Rental Details Placeholder </div>}/>
+          <Route path='/rental-details' element={<RentalDetails /> } />
           <Route path='/tanks' element={<div>Tanks Placeholder</div>}/>
           <Route path='/tanks/:id' element={<div>Specific Tank Placeholder</div>} />
           <Route path='/reservations' element={<div>Reservations Placeholder</div>}/>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 
@@ -35,11 +35,12 @@ const homepage = () => {
       </div>
     </div>
   );
-};import React, { useState } from 'react';
+};*/
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 
-const HomePage = () => {
+const RentalDetails = () => {
   const [pickUpTime, setPickUpTime] = useState('');
   const [returnTime, setReturnTime] = useState('');
 
@@ -76,21 +77,4 @@ const HomePage = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
+export default RentalDetails; 
