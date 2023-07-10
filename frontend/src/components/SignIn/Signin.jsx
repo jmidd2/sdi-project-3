@@ -21,7 +21,7 @@ const SignIn = () => {
   const handleLogin = async () => {
     // fetch to backend with plaintext un and pw
     // TODO: CHANGE THIS ADDRESS WHEN JON ISNT HOSTING!!!!
-    let response = await fetch('http://10.10.1.58:3001/user/signin', {
+    let response = await fetch('http://localhost:3001/user/signin', {
         method: "POST",
         body: JSON.stringify({un: username.current.value, pw: password.current.value}),
         headers: {

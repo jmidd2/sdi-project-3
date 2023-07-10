@@ -36,12 +36,6 @@ WHERE vehicle_id NOT IN (
     AND (pickup_time <= <specified_return_time> AND return_time >= <specified_pickup_time>)
 );
    */
-
-  // console.log(results);
-  // let utc = Date.parse(req.query.pickUpTime);
-  // console.log('pickup', utc);
-  // let date = new Date(utc);
-  // console.log(date);
   res.status(200).json(results);
 });
 

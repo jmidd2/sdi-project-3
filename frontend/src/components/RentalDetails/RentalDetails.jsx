@@ -26,7 +26,7 @@ const RentalDetails = () => {
       queryString += `${key}=${encodeURIComponent(value)}&`;
     })
     // TODO: CHANGE THIS ADDRESS WHEN JON ISNT HOSTING!!!!
-    let response = await fetch(`http://10.10.1.58:3001/rentals/search?${queryString}`);
+    let response = await fetch(`http://localhost:3001/rentals/search?${queryString}`);
     // console.log(await response.json());
     let data = await response.json();
 
@@ -44,7 +44,7 @@ const RentalDetails = () => {
     let ignore = false;
     const fetchData = async () => {
       // TODO: CHANGE THIS ADDRESS WHEN JON ISNT HOSTING!!!!
-      const response = await fetch('http://10.10.1.58:3001/locations/');
+      const response = await fetch('http://localhost:3001/locations/');
       if (!ignore) {
         // set locations
         let data = await response.json()
