@@ -26,20 +26,16 @@ const SignIn = () => {
   return (
     <div style={{backgroundImage:`url(${background})`, backgroundSize: 'cover'}}>
       <Container className="bg-image d-flex flex-column justify-content-center align-items-center vh-100">
-        <Card className="mb-5 rounded bg-secondary bg-white shadow-lg">
-          <div className='row justify-content-center text-center'>
-              <p className='col-6'>Login</p>
+        <Card className="mb-5 d-flex flex-column align-items-left rounded bg-secondary bg-white shadow-lg w-25 p-2 m-3">
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <div className='row justify-content-center form-floating mb-2 w-100 px-3'>
+              <input className='' type='text' placeholder='Username' id="un"/>
           </div>
-          <div className='row justify-content-center'>
-              <input className='col-4' type='text' placeholder='Username' id="un"/>
+          <div className='row justify-content-center mb-2 w-100 px-3'>
+              <input className='mb-3' type='password' placeholder='Password' id="pw"/>
           </div>
-          <div className='row justify-content-center'>
-              <input className='col-4' type='password' placeholder='Password' id="pw"/>
-          </div>
-          <div className='row justify-content-center'>
-              <button className='col-2' onClick={() => handleLogin()}>Login</button> {/* On click check un/pw against DB and set session data*/}
-              <button className='col-2' onClick={() => handleSignup()}>Sign Up</button> {/* On click navigate to Sign Up page*/}
-          </div>
+          <Button className='mb-5 w-50' variant="success" onClick={() => handleLogin()}>Log In</Button> {/* On click check un/pw against DB and set session data*/}
+          <Button className='w-50' variant="success" onClick={() => handleSignup()}>Sign Up</Button> {/* On click navigate to Sign Up page*/}
         </Card>
         <Container className='d-flex justify-content-center'>
           <Button type="button" variant="success" onClick={()=>navigate('/tanks')}>Vehicle Inventory</Button>
