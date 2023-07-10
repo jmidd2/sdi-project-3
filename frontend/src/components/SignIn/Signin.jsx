@@ -34,8 +34,10 @@ const SignIn = () => {
           <div className='row justify-content-center mb-2 w-100 px-3'>
               <input className='mb-3' type='password' placeholder='Password' id="pw"/>
           </div>
-          <Button className='mb-5 w-50' variant="success" onClick={() => handleLogin()}>Log In</Button> {/* On click check un/pw against DB and set session data*/}
-          <Button className='w-50' variant="success" onClick={() => handleSignup()}>Sign Up</Button> {/* On click navigate to Sign Up page*/}
+          <div className='d-flex row justify-content-around'>
+            <Button className='w-25 mh-100' variant="success" onClick={() => handleLogin()}>Log In</Button> {/* On click check un/pw against DB and set session data*/}
+            <Button className='w-25' variant="success" onClick={() => handleSignup()}>Sign Up</Button> {/* On click navigate to Sign Up page*/}
+          </div>
         </Card>
         <Container className='d-flex justify-content-center'>
           <Button type="button" variant="success" onClick={()=>navigate('/tanks')}>Vehicle Inventory</Button>
