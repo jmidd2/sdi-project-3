@@ -1,10 +1,7 @@
 import express from 'express';
-import multer from 'multer';
 import db from '../db.js';
 
 const router = express.Router();
-
-const upload = multer();
 
 router.get('/', (req, res) => {
   db('rentals')
@@ -14,18 +11,9 @@ router.get('/', (req, res) => {
     });
 });
 
-// Receiving somehow
-// location id
-// pickup time/date
-// return time/date
-// vehicle level
-
 // Query from db
 // all vehicles that are not reserved within pickup and return times at specified location
-router.get('/search', upload.none(), async (req, res) => {
-  // let data = await req.body;
-  // console.log(body);
-  // let results = [];+
+router.get('/search', async (req, res) => {
   const location = Number.parseInt(req.query.location);
   let results = await db('tank_inventory')
     .select()
