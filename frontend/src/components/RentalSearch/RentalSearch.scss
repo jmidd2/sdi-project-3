@@ -1,0 +1,83 @@
+.main-container {
+  // display: grid;
+  // grid-template-rows: 1fr 1fr 3fr 1fr;
+  // grid-template-columns: repeat(10, 1fr);
+  // grid-template-areas: 
+  // "location | 3 | 3 | 4 | 8"
+  // "pickup | 2 | 3 | 2 | 5"
+  // "return | 2 | 7 | 2 | 9 "
+  // "tier-list | 3 | 1 | 5 | 10"
+  // "browse | 6 | 4 | 6 | 7";
+
+   display: grid;
+   grid-template-rows: auto 1fr;
+   grid-template-columns: 1fr;
+   gap:1rem;
+  // grid-template-areas: 
+  // "location | 3 | 3 | 4 | 8"
+  // "pickup | 2 | 3 | 2 | 5"
+  // "return | 2 | 7 | 2 | 9 "
+  // "tier-list | 3 | 1 | 5 | 10"
+  // "browse | 6 | 4 | 6 | 7";
+}
+.main-reservation-container{
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:2rem;
+background-color:#fff;
+border:1px solid #ccc;
+border-radius:0.5rem;
+}
+h2{
+  margin-bottom:1.5rem;
+}
+
+.location-main-dropdown {
+  margin-bottom:1.5em;
+}
+#city{
+  margin-right:1rem;
+}
+
+#pickup-return-form{
+  display:flex;
+  flex-direction:column;
+  margin: bottom 1.5em; 
+}
+label{
+  margin-bottom:0.5rem;
+}
+#box-container{
+  display:flex;
+  gap:1rem;
+  margin-bottom:1.5rem;
+}
+.box{
+  margin-right:0.25rem;
+}
+
+#browse-button{
+  padding:0.75rem 1rem;
+  font-weight:bold;
+  border-radius:0.5rem;
+  background-color:#017501;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+#browse-button:hover{
+  background-color:#004d00;
+}
+#pick-up-time,
+#return-time {transition: background-color 0.3s;
+}
+#pick-up-time:hover,
+#return-time:hover{
+background-color:rgba(0,123,255,0.1);
+}
+
+input[type=radio]:checked {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
