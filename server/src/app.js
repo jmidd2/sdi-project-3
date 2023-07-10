@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+// import multer from 'multer';
 import 'dotenv/config';
 import db from './db.js';
 import {
@@ -12,13 +13,14 @@ import {
 } from './routes/index.js';
 
 const app = express();
-
+// export const upload = multer();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
 app.use('/user', userRouter);
-// app.use('vehicle-loadouts');
+app.use('/rentals', rentalRouter);
+app.use('/locations', locationRouter); 
 // app.use('weapon-inventory');
 
 app.get('/', async (req, res) => {
