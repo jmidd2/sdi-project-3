@@ -27,7 +27,7 @@ const SignIn = () => {
     <div style={{backgroundImage:`url(${background})`, backgroundSize: 'cover'}}>
       <Container className="bg-image d-flex flex-column justify-content-center align-items-center vh-100">
         <Card className="mb-5 d-flex flex-column align-items-left rounded bg-secondary bg-white shadow-lg w-25 p-2 m-3">
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 class="h3 mb-3 fw-normal">Please Sign In</h1>
           <div className='row justify-content-center form-floating mb-2 w-100 px-3'>
               <input className='' type='text' placeholder='Username' id="un"/>
           </div>
