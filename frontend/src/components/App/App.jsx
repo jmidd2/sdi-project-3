@@ -22,7 +22,11 @@ const App = () => {
         <Routes>  
           <Route path='/' element={<SignIn />}/>
           <Route path='/signup' element={<SignUp />}/>
+          <Route path='/rental-details' element={<div>Rental Details Placeholder </div>}/>
           <Route path='/tanks' element={<div>Tanks Placeholder</div>}/>
+          <Route path='/tanks/:id' element={<div>Specific Tank Placeholder</div>} />
+          <Route path='/reservations' element={<div>Reservations Placeholder</div>}/>
+          <Route path='/reservations/:id'element={<div>Specific Reservation Placeholder</div>}/>
         </Routes>
       </Router>
     </appContext.Provider>

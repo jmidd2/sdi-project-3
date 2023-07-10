@@ -92,7 +92,7 @@ router.post('/signin', async (req, res) => {
   let user = await db('users').where({ username: req.body.un }).first();
   console.log(user);
   if (user === undefined) {
-    res.status(404).send('Incorrect username');
+    res.status(404).json('Incorrect username');
   } else {
     bcrypt.compare(req.body.pw, user.password, async (err, valid) => {
       if (valid) {
@@ -107,9 +107,9 @@ router.post('/signin', async (req, res) => {
           ({ token, jwtid } = generateAccessToken(req.body.un));
           await db('users').where({id: user.id}).update({issued_jwt_id: jwtid});
         }
-        res.status(200).send(token);
+        res.status(200).json(token);
       } else {
-        res.status(401).send('Incorrect password');
+        res.status(401).json('Incorrect password');
       }
     });
   }
@@ -123,7 +123,7 @@ router.get(
   }),
   function (req, res) {
     console.log('after auth');
-    if (!req.auth.permissions.admin) return res.sendStatus(401);
+    if (!req.auth.username) return res.sendStatus(401);
 
     res.status(200).send(`Welcome, ${req.auth.username}!`);
   },
