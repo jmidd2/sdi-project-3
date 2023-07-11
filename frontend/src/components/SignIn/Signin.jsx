@@ -20,6 +20,7 @@ const SignIn = () => {
 
   const handleLogin = async () => {
     // fetch to backend with plaintext un and pw
+    // TODO: CHANGE THIS ADDRESS WHEN JON ISNT HOSTING!!!!
     let response = await fetch('http://localhost:3001/user/signin', {
         method: "POST",
         body: JSON.stringify({un: username.current.value, pw: password.current.value}),
@@ -39,7 +40,7 @@ const SignIn = () => {
       // set some state for logged in to true?
       setIsLoggedIn(true);
       // navigate to /home page
-      navigate('/home');
+      navigate('/rental-details');
     }
   }
 

@@ -19,7 +19,8 @@ export async function up(knex) {
       table
         .integer('customer_id')
         .unsigned()
-        .references('customers.customer_id');
+        .references('customers.customer_id')
+        .onDelete('CASCADE');
       table.string('username');
       table.string('password');
       table.string('issued_jwt_id');
@@ -30,9 +31,10 @@ export async function up(knex) {
       table
         .integer('location_id')
         .unsigned()
-        .references('locations.location_id');
+        .references('locations.location_id')
+        .onDelete('CASCADE');
       table.string('model');
-      table.decimal('base_price');
+      table.specificType('base_price', 'money');
     })
     .createTable('rentals', table => {
       table.increments('contract_id');
@@ -40,17 +42,20 @@ export async function up(knex) {
         .integer('tank_id')
         .unsigned()
         .unique()
-        .references('tank_inventory.tank_id');
+        .references('tank_inventory.tank_id')
+        .onDelete('CASCADE');
       table
         .integer('customer_id')
         .unsigned()
-        .references('customers.customer_id');
+        .references('customers.customer_id')
+        .onDelete('CASCADE');
       table.dateTime('start_date');
       table.datetime('end_date');
       table
         .integer('rental_origin')
         .unsigned()
-        .references('locations.location_id');
+        .references('locations.location_id')
+        .onDelete('CASCADE');
       table.string('location');
     });
 }

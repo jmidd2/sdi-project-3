@@ -9,14 +9,28 @@ export const seed = async knex => {
     {
       customer_id: 1,
       name: 'Ivan',
-      tier: 0,
+      tier: 1,
 
     },
 
     {
       customer_id: 2,
       name: 'Nataliya',
-      tier: 3,
+      tier: 2,
+
+    },
+
+    {
+      customer_id: 3,
+      name: 'Vladimir',
+      tier: 0,
+
+    },
+
+    {
+      customer_id: 4,
+      name: 'Khabib Nurmagomedov',
+      tier: 2,
 
     },
 
