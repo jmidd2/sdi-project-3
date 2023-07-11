@@ -6,7 +6,7 @@ import React from 'react';
    // const isRentalDetailsPage=location.pathname==='/RentalDetails';
     // const location = useLocation();
   
-      <nav className="navbar bg-success bg-gradient fixed-top">
+      <nav className="navbar bg-success bg-gradient">
         <div className="container-fluid justify-content-left">
           <span className="navbar-brand text-white mb-0 h1 px-5">Tankvana</span>
 
