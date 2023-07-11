@@ -1,12 +1,12 @@
 import React, { useRef, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import { appContext } from '../App/App';
+import { AppContext } from '../AppLayout/AppLayout';
 import {Button, Container, Card} from 'react-bootstrap';
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn } = useContext(appContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
   const username = useRef('');
   const password = useRef('');
@@ -14,7 +14,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if(isLoggedIn) {
-      navigate('/home');
+      navigate('/rental-details');
     }
   }, [isLoggedIn])
 

@@ -22,36 +22,12 @@ const ReservationList = () => {
   }
 
   //Query for all reservations
-  fetch('http://localhost:3001/rentals')
+  fetch('http://localhost:3001/reservation')
     .then((res)=>res.json())
     .then((rentals)=>{
       // setReservations(rentals.filter((rental)=>rental.))
       console.log(rentals)
-    })
-
-  //Modify Reservation Logic
-  const modifyRes = async () => {
-    let response = await fetch('', {
-      method: 'PUT',
-      body: JSON.stringify({uid: customerId, put: pickUpTime, rt: returnTime, loc: location}),
-      headers: {
-        "Content-Type":"application/json"
-      }
-    })
-    console.log(tokenCookie());
-  }
-
-  //Cancel Reservation Logic
-  const cancelRes = async () =>  {
-    let response = await fetch('', {
-      method: 'DELETE',
-      body: JSON.stringify({ }),
-      headers: {
-        "Content-Type":"application/json"
-      }
-    })
-  }
-  
+    })  
   
 
   return (

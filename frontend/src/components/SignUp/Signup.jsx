@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
-import { appContext } from '../App/App';
+import { AppContext } from '../AppLayout/AppLayout';
 import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
     const navigate = useNavigate()
-    const {setIsLoggedIn} = useContext(appContext)
+    const {setIsLoggedIn} = useContext(AppContext)
 
     const handleSignup = async () => {
         const un = document.getElementById('un').value

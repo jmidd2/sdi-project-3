@@ -93,4 +93,28 @@ router.post(
   }
 );
 
+router.get(
+  '/reservation',
+  expressjwt({
+    secret: process.env.TOKEN_SECRET,
+    algorithms: ['HS256'],
+  }),
+  async (req, res, next) => {
+    console.log('after auth');
+    if (!req.auth.username) return res.sendStatus(401);
+
+    try {
+      let user = await db('users')
+        .select('id')
+        .first()
+        .where({ username: req.auth.username });
+
+      let response = await fetch();
+    } catch (e) {
+      res.status(500);
+      next(e);
+    }
+  }
+);
+
 export default router;

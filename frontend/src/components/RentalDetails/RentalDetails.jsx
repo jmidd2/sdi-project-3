@@ -5,11 +5,11 @@ import {Button, Container, Card} from 'react-bootstrap';
 import RentalSearch from '../RentalSearch/RentalSearch';
 import RentalVehicles from '../RentalVehicles/RentalVehicles';
 import { useNavigate } from 'react-router-dom';
-import { appContext } from '../App/App';
+import { AppContext } from '../AppLayout/AppLayout';
 
 const RentalDetails = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn } = useContext(appContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
   const [resDetails, setResDetails] = useState({});
   const [vehicleList, setVehicleList] = useState([])
 
