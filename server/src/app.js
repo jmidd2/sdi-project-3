@@ -23,7 +23,7 @@ app.use('/locations', locationRouter);
 // app.use('weapon-inventory');
 
 app.get('/', async (req, res) => {
-  const data = await db('test').select();
+  const data = await db('users').select();
   res.send(data);
 });
 
