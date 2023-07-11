@@ -1,13 +1,13 @@
-import React, {useState, createContext} from 'react';
+import React from 'react';
 import './App.scss';
 import AppLayout from '../AppLayout/AppLayout';
 import SignIn from '../SignIn/Signin';
 import SignUp from '../SignUp/Signup';
 import RentalDetails from '../RentalDetails/RentalDetails';
-import {BrowserRouter as Router, Routes, Route, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import ReservationList from '../ReservationList/ReservationList';
 
-  export const router = createBrowserRouter(
+export const router = createBrowserRouter(
   createRoutesFromElements(
       <Route element={<AppLayout />}>
         <Route path='/' element={<SignIn />}/>

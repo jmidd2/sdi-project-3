@@ -109,10 +109,23 @@ router.get(
         .first()
         .where({ username: req.auth.username });
 
-      let response = await fetch();
+      let response = await db('rentals')
+        .select('*')
+        .where({ customer_id: user.id })
+        .join('locations', 'rentals.rental_origin', '=', 'locations.location_id');
+
+      res.send(response);
+
     } catch (e) {
       res.status(500);
       next(e);
+    }
+  },
+  (err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401).send('Token was invalid.');
+    } else {
+      next(err);
     }
   }
 );
