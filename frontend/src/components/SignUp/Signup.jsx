@@ -25,7 +25,7 @@ const SignUp = () => {
             // set some state for logged in to true?
             setIsLoggedIn(true)
             // navigate to /home page
-            navigate('/home')
+            navigate('/rental-details')
         } else {
             alert('User already exists. Please return to login or try a new user.')
         }

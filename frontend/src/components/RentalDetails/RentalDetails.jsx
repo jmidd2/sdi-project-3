@@ -20,6 +20,7 @@ const RentalDetails = () => {
   }, [isLoggedIn]);
 
   const handleSubmit = async (event) => {
+    console.log('handling submit');
     event.preventDefault();
     const formData = new FormData(event.target);
     
@@ -44,7 +45,8 @@ const RentalDetails = () => {
     //Conditional Render Here on tanksLoaded
     <Container className="d-flex">
       <div className="main-container">
-      {vehicleList.length ? <RentalVehicles vehicleList={vehicleList} resDetails={resDetails} /> : <RentalSearch handleSubmit={handleSubmit} />}
+      <RentalSearch handleSubmit={handleSubmit} />
+      {vehicleList.length && <RentalVehicles vehicleList={vehicleList} resDetails={resDetails} />}
       </div>
     </Container>
   )
