@@ -39,4 +39,6 @@ WHERE vehicle_id NOT IN (
   res.status(200).json(results);
 });
 
+  
+
 export default router;

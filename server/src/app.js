@@ -8,7 +8,7 @@ import {
   rentalRouter,
   customerRouter,
   locationRouter,
-  userRouter,
+  userRouter
 } from './routes/index.js';
 
 const app = express();
