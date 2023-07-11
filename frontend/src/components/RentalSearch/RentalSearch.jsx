@@ -2,12 +2,8 @@ import {useEffect, useState} from 'react';
 import './RentalSearch.scss';
 import {CardGroup, Card} from 'react-bootstrap'
 
-const RentalSearch = ({selectedCity, setSelectedCity, handleSubmit}) => {
+const RentalSearch = ({handleSubmit}) => {
   const [locations, setLocations] = useState([])
-
-  const handleCityChange = (event) => {
-    setSelectedCity(event.target.value);
-  };
   
   useEffect(() => {
     let ignore = false;
@@ -41,11 +37,10 @@ const RentalSearch = ({selectedCity, setSelectedCity, handleSubmit}) => {
 
         <div className="location-main-dropdown grid-item">
           <label htmlFor="location">Choose a city:</label>
-          <select id="location" name="location" value={selectedCity} onChange={handleCityChange}>
+          <select id="location" name="location">
             <option key={0} value="">Select City</option>
             {locations?.map(loc => (<option key={loc.location_id} value={loc.location_id}>{loc.city}</option>))}
           </select>
-          {selectedCity && <p>Selected City: {selectedCity}</p>}
         </div>
 
         <div id="pickup-return-form">
@@ -55,7 +50,7 @@ const RentalSearch = ({selectedCity, setSelectedCity, handleSubmit}) => {
           <input type="datetime-local" id="returnTime" name="returnTime" /><br /> {/* removed 'required' for testing */}
         </div>
 
-        <CardGroup>
+        <CardGroup className='d-none'>
           <Card>
             <Card.Title>Budget</Card.Title>
             <input type="radio" id="budget" name="tier" value="1"/>
