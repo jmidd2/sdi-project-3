@@ -8,7 +8,7 @@ import './Header.scss';
 
 const Header = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useContext(AppContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
 
   const logout = e => {
     e.preventDefault();
@@ -52,13 +52,14 @@ const Header = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link
-              className='link-light'
-              onClick={e => logout(e)}
-            >
-              Logout
-            </Nav.Link>
-            
+            {isLoggedIn && (
+              <Nav.Link
+                className='link-light'
+                onClick={e => logout(e)}
+              >
+                Logout
+              </Nav.Link>
+            )}
           </Nav>
         </Container>
       </Navbar>
