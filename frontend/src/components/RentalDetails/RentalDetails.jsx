@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import './RentalDetails.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Container } from 'react-bootstrap';
@@ -12,6 +12,7 @@ const RentalDetails = () => {
   const { isLoggedIn } = useContext(AppContext);
   const [resDetails, setResDetails] = useState({});
   const [vehicleList, setVehicleList] = useState([]);
+  const initalLoad = useRef(true);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -37,7 +38,7 @@ const RentalDetails = () => {
       `http://localhost:3001/rentals/search?${queryString}`
     );
     let data = await response.json();
-
+    initalLoad.current = false;
     setVehicleList(data);
   };
 
@@ -46,6 +47,9 @@ const RentalDetails = () => {
     <Container className='d-flex justify-content-center'>
       <div className='main-container col-8'>
         <RentalSearch handleSubmit={handleSubmit} />
+        {vehicleList.length === 0 && !initalLoad.current && (
+          <p>No Vehicles Found</p>
+        )}
         {vehicleList.length > 0 && (
           <RentalVehicles
             vehicleList={vehicleList}

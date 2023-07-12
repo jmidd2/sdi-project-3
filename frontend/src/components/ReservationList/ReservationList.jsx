@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { CardGroup, Col } from 'react-bootstrap';
 import ResCard from '../ResCard/ResCard';
 import { AppContext } from '../AppLayout/AppLayout';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './ReservationList.scss';
 
@@ -31,10 +31,14 @@ const ReservationList = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      let data = await response.json();
+      if (response.status === 200) {
+        let data = await response.json();
 
-      setReservations(data);
-      setRefresh(false);
+        setReservations(data);
+        setRefresh(false);
+      } else {
+        alert('Server Error: ' + response.status);
+      }
     };
     if (refresh) {
       makeReq();
@@ -44,6 +48,11 @@ const ReservationList = () => {
 
   return (
     <div className='reservation-list'>
+      {reservations.length === 0 && (
+        <p>
+          No Reservations available. <Link to='/rental-details'>Make one!</Link>
+        </p>
+      )}
       <CardGroup
         xs={1}
         md={2}
