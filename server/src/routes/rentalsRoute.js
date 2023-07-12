@@ -112,10 +112,85 @@ router.get(
       let response = await db('rentals')
         .select('*')
         .where({ customer_id: user.id })
-        .join('locations', 'rentals.rental_origin', '=', 'locations.location_id');
+        .join(
+          'locations',
+          'rentals.rental_origin',
+          '=',
+          'locations.location_id'
+        )
+        .join(
+          'tank_inventory',
+          'rentals.tank_id',
+          '=',
+          'tank_inventory.tank_id'
+        );
 
       res.send(response);
+    } catch (e) {
+      res.status(500);
+      next(e);
+    }
+  },
+  (err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401).send('Token was invalid.');
+    } else {
+      next(err);
+    }
+  }
+);
 
+router.put(
+  '/reservation/:id',
+  expressjwt({
+    secret: process.env.TOKEN_SECRET,
+    algorithms: ['HS256'],
+  }),
+  async (req, res, next) => {
+    console.log('after auth');
+    if (!req.auth.username) return res.sendStatus(401);
+
+    try {
+      console.log('updating', req.body);
+      // By reservation id
+      // find fields that have data
+      // and update db record respectively
+      await db('rentals')
+        .where('contract_id', req.body.contractId)
+        .update({ start_date: req.body.startDate, end_date: req.body.endDate });
+
+      res.status(200).send(`patching ${req.params.id}`);
+    } catch (e) {
+      res.status(500);
+      next(e);
+    }
+  },
+  (err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401).send('Token was invalid.');
+    } else {
+      next(err);
+    }
+  }
+);
+
+router.delete(
+  '/reservation/:id',
+  expressjwt({
+    secret: process.env.TOKEN_SECRET,
+    algorithms: ['HS256'],
+  }),
+  async (req, res, next) => {
+    console.log('after auth');
+    if (!req.auth.username) return res.sendStatus(401);
+
+    try {
+      await db('rentals').where('contract_id', req.params.id).delete();
+
+      // By reservation id
+      // delete db record
+
+      res.status(200).json(`deleted ${req.params.id}`);
     } catch (e) {
       res.status(500);
       next(e);

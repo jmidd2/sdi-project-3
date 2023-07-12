@@ -1,0 +1,28 @@
+.resultsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.resultsHeader {
+    text-align: center;
+}
+
+.results {
+    background-color: rgba(98, 94, 94, 0.06);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    margin: 1em;
+    padding: 1em;
+    border: none;
+}
+
+.resultsBtn {
+    width: 180px;
+    margin-top: .5em;
+}
+
+.tankImg {
+    width: 180px;
+    aspect-ratio: 1/1;
+}

@@ -35,7 +35,7 @@ const SignIn = () => {
     else {
       let token = await response.json();
       // store token in cookie
-      document.cookie = `username=${username.current.value}; max-age=3600`;
+      // document.cookie = `username=${username.current.value}; max-age=3600`;
       document.cookie = `token=${token}; max-age=3600`;
       // set some state for logged in to true?
       setIsLoggedIn(true);
@@ -67,7 +67,7 @@ const SignIn = () => {
           </div>
         </Card>
         <Container className='d-flex justify-content-center'>
-          <Button type="button" variant="success" onClick={()=>navigate('/tanks')}>Vehicle Inventory</Button>
+         {/* <Button type="button" variant="success" onClick={()=>navigate('/tanks')}>Vehicle Inventory</Button>*/}
         </Container>
       </Container>
     </div>

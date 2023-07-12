@@ -36,7 +36,7 @@ const RentalSearch = ({handleSubmit}) => {
         <h2>Rental Tank Homepage</h2>
 
         <div className="location-main-dropdown grid-item">
-          <label htmlFor="location">Choose a city:</label>
+          <label htmlFor="location">Choose a city: </label>
           <select id="location" name="location">
             <option key={0} value="">Select City</option>
             {locations?.map(loc => (<option key={loc.location_id} value={loc.location_id}>{loc.city}</option>))}

@@ -43,10 +43,10 @@ const RentalDetails = () => {
 
   return (
     //Conditional Render Here on tanksLoaded
-    <Container className="d-flex">
+    <Container className="d-flex justify-content-center">
       <div className="main-container">
       <RentalSearch handleSubmit={handleSubmit} />
-      {vehicleList.length && <RentalVehicles vehicleList={vehicleList} resDetails={resDetails} />}
+      {vehicleList.length > 0 && <RentalVehicles vehicleList={vehicleList} resDetails={resDetails} />}
       </div>
     </Container>
   )

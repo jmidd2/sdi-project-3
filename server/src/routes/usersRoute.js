@@ -55,7 +55,7 @@ router.get('/', async (req, res, next) => {
 //  insert new user
 //  generate token
 //  respond with token
-router.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res, next) => {
   let newUser =
     (await db('users').select('*').where({ username: req.body.un })).length ===
     0;
@@ -66,15 +66,19 @@ router.post('/signup', async (req, res) => {
     let hash = pwHash(req.body.pw);
     console.log('hash ', hash);
     console.log('token ', token);
-    // bcrypt.hash(req.body.pw, 10, async (err, hash) => {
-    // await db('users').insert({
-    //   username: req.body.un,
-    //   password: hash,
-    //   issued_jwt_id: jwtid,
-    //   issued_jwt_expiration: '',
-    //   // });
-    // });
-    res.status(201).json(token);
+    try {
+      // bcrypt.hash(req.body.pw, 10, async (err, hash) => {
+      await db('users').insert({
+        username: req.body.un,
+        password: hash,
+        issued_jwt_id: jwtid,
+        issued_jwt_expiration: '',
+      });
+      // });
+      res.status(201).json(token);
+    } catch (e) {
+      next(e);
+    }
   } else {
     res.status(401).json(null);
   }
