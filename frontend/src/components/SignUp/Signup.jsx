@@ -1,10 +1,19 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { AppContext } from '../AppLayout/AppLayout';
 import { useNavigate } from 'react-router-dom'
+import './SignUp.scss';
+import 'bootstrap/dist/css/bootstrap.css';
+// import {CardGroup, Card} from 'react-bootstrap'
 
 const SignUp = () => {
     const navigate = useNavigate()
-    const {setIsLoggedIn} = useContext(AppContext)
+    const {isLoggedIn ,setIsLoggedIn} = useContext(AppContext)
+
+    useEffect(() => {
+        if(isLoggedIn) {
+            navigate('/')
+        }
+    }, [])
 
     const handleSignup = async () => {
         const un = document.getElementById('un').value
@@ -20,7 +29,7 @@ const SignUp = () => {
         let token = await response.json();
         if (token) {
             // store token in cookie
-            document.cookie = `username=${un}; max-age=3600`;
+            // document.cookie = `username=${un}; max-age=3600`;
             document.cookie = `token=${token}; max-age=3600`;
             // set some state for logged in to true?
             setIsLoggedIn(true)
@@ -32,19 +41,12 @@ const SignUp = () => {
     }
 
     return (
-        <>
-        <div className='container bg-secondary'>
-            <div className='row'>
-                <input type="text" id='un' placeholder='Username...'/>
-            </div>
-            <div className='row'>
-                <input type="password" id='pw' placeholder='Password...'/>
-            </div>
-            <div className='row'>
-                <button onClick={() => handleSignup()}>Create Account</button>
-            </div>
+        <div className='SignupContainer'>
+            <h2>Create New User</h2>
+            <input className='username' type="text" id='un' placeholder='Username...'/>
+            <input className='password' type="password" id='pw' placeholder='Password...'/>
+            <button className='btn btn-success' onClick={() => handleSignup()}>Create Account</button>
         </div>
-        </>
     )
 }
 

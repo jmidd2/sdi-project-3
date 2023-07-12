@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './RentalDetails.scss';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Button, Container, Card} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import RentalSearch from '../RentalSearch/RentalSearch';
 import RentalVehicles from '../RentalVehicles/RentalVehicles';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { AppContext } from '../AppLayout/AppLayout';
 
 const RentalDetails = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const { isLoggedIn } = useContext(AppContext);
   const [resDetails, setResDetails] = useState({});
   const [vehicleList, setVehicleList] = useState([])
 

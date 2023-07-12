@@ -117,7 +117,8 @@ router.get(
           'rentals.tank_id',
           '=',
           'tank_inventory.tank_id'
-        );
+        )
+        .orderBy('contract_id');
 
       res.send(response);
     } catch (e) {

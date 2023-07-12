@@ -1,7 +1,7 @@
 import React from "react";
 import {useNavigate} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
-import {CardGroup, Card} from 'react-bootstrap'
+import {Card} from 'react-bootstrap'
 import './RentalVehicles.scss'
 
 const RentalVehicles = ({vehicleList, resDetails}) => {
