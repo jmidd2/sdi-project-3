@@ -1,14 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../AppLayout/AppLayout';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-// import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode";
 
 import './Header.scss';
 
 const Header = () => {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AppContext);
+  const [username, setUsername] = useState('Log In');
+
+  useEffect(() => {
+    let token = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('token='))
+    ?.split('=')[1];
+
+    if(token) {
+      setUsername(jwt_decode(token));
+    }
+  }, [])
 
   const logout = e => {
     e.preventDefault();
@@ -58,7 +70,7 @@ const Header = () => {
             >
               Logout
             </Nav.Link>
-            
+            {/* <i className='bi bi-person-circle'>{username}</i> */}
           </Nav>
         </Container>
       </Navbar>
