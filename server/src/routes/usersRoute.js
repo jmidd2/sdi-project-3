@@ -64,17 +64,14 @@ router.post('/signup', async (req, res, next) => {
     let { token, jwtid } = generateAccessToken(req.body.un);
     //db call to insert username and id...
     let hash = pwHash(req.body.pw);
-    console.log('hash ', hash);
-    console.log('token ', token);
     try {
-      // bcrypt.hash(req.body.pw, 10, async (err, hash) => {
       await db('users').insert({
         username: req.body.un,
         password: hash,
         issued_jwt_id: jwtid,
         issued_jwt_expiration: '',
       });
-      // });
+
       res.status(201).json(token);
     } catch (e) {
       next(e);

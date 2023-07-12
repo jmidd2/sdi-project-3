@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
 // Query from db
 // all vehicles that are not reserved within pickup and return times at specified location
 router.get('/search', async (req, res) => {
-  console.log('searching', req.query);
   const location = Number.parseInt(req.query.location);
   let results = await db('tank_inventory')
     .select()
@@ -28,7 +27,6 @@ router.get('/search', async (req, res) => {
         .andWhere('end_date', '>=', req.query.pickUpTime);
     })
     .andWhere('location_id', location);
-  console.log(results);
   /**
 SELECT *
 FROM inventory
@@ -49,7 +47,6 @@ router.post(
     algorithms: ['HS256'],
   }),
   async (req, res, next) => {
-    console.log('after auth');
     if (!req.auth.username) return res.sendStatus(401);
 
     // res.status(200).send(`Welcome, ${req.auth.username}!`);
@@ -76,8 +73,6 @@ router.post(
         ['contract_id']
       );
 
-      console.log('response: ', response);
-
       res.status(201).send('Reservation successful');
     } catch (e) {
       res.status(500);
@@ -100,7 +95,6 @@ router.get(
     algorithms: ['HS256'],
   }),
   async (req, res, next) => {
-    console.log('after auth');
     if (!req.auth.username) return res.sendStatus(401);
 
     try {
@@ -147,11 +141,9 @@ router.put(
     algorithms: ['HS256'],
   }),
   async (req, res, next) => {
-    console.log('after auth');
     if (!req.auth.username) return res.sendStatus(401);
 
     try {
-      console.log('updating', req.body);
       // By reservation id
       // find fields that have data
       // and update db record respectively
@@ -181,7 +173,6 @@ router.delete(
     algorithms: ['HS256'],
   }),
   async (req, res, next) => {
-    console.log('after auth');
     if (!req.auth.username) return res.sendStatus(401);
 
     try {
