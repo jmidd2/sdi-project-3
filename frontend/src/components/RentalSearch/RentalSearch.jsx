@@ -79,6 +79,7 @@ const RentalSearch = ({ handleSubmit }) => {
             type='datetime-local'
             id='pickUpTime'
             name='pickUpTime'
+            required
           />
           <br /> {/* removed 'required' for testing */}
           <label
@@ -92,6 +93,7 @@ const RentalSearch = ({ handleSubmit }) => {
             type='datetime-local'
             id='returnTime'
             name='returnTime'
+            required
           />
           <br /> {/* removed 'required' for testing */}
         </div>
