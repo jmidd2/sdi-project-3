@@ -59,7 +59,6 @@ router.post('/signup', async (req, res, next) => {
   let newUser =
     (await db('users').select('*').where({ username: req.body.un })).length ===
     0;
-  console.log(newUser);
   if (newUser) {
     let { token, jwtid } = generateAccessToken(req.body.un);
     //db call to insert username and id...

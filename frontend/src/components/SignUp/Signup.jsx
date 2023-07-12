@@ -41,12 +41,20 @@ const SignUp = () => {
     }
 
     return (
-        <div className='SignupContainer'>
-            <h2>Create New User</h2>
-            <input className='username' type="text" id='un' placeholder='Username...'/>
-            <input className='password' type="password" id='pw' placeholder='Password...'/>
-            <button className='btn btn-success' onClick={() => handleSignup()}>Create Account</button>
-        </div>
+        <>
+            <div className='headerContainer'>
+                <h1 className='header1'>Slava Ukraini!</h1>
+                <h1 className='header2'>Heroyam Slava.</h1>
+            </div>
+            <div className='mainContainer'>
+                <div className='signup'>
+                    <h2>Create New User</h2>
+                    <input className='username' type="text" id='un' placeholder='Username...'/>
+                    <input className='password' type="password" id='pw' placeholder='Password...'/>
+                    <button className='btn btn-success' onClick={() => handleSignup()}>Create Account</button>
+                </div>
+            </div>
+        </>
     )
 }
 

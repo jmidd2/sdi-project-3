@@ -1,24 +1,26 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../AppLayout/AppLayout';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
- const Header = () => {
-  const navigate = useNavigate()
-  const { setIsLoggedIn } = useContext(AppContext)
+import './Header.scss';
 
-  const logout = (e) => {
+const Header = () => {
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(AppContext);
+
+  const logout = e => {
     e.preventDefault();
-    setIsLoggedIn(false)
-    navigate('/')
-  }
+    setIsLoggedIn(false);
+    navigate('/');
+  };
 
   return (
-  // function Header(){
+    // function Header(){
     // const isRentalDetailsPage=location.pathname==='/RentalDetails';
-      // const location = useLocation();
+    // const location = useLocation();
     <>
-        {/* <nav className="navbar bg-success bg-gradient">
+      {/* <nav className="navbar bg-success bg-gradient">
           <div className="container-fluid justify-content-left">
             <span onClick={() => navigate('/')} className="navbar-brand text-white mb-0 h1 px-5">Tankvana</span>
             <span onClick={() => navigate('/reservations')} className="text-white mb-0 h1 px-5">Reservations</span>
@@ -29,23 +31,37 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
             )
           </div>
         </nav> */}
-        <Navbar className="bg-success bg-gradient">
-          <Container className=''>
-            <Navbar.Brand href="/"><strong>Tankvana</strong></Navbar.Brand>
-            <Nav className='me-auto ms-2'>
-                <Nav.Link className="link-light" href='/reservations'>Reservations</Nav.Link>
-            </Nav>
-            <Nav>
-              <Nav.Link className="link-light" onClick={(e) => logout(e)}>Logout</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
-        </>
-    )
-
-  }
-
-
-
+      <Navbar className='bg-success bg-gradient'>
+        <Container className=''>
+          <Navbar.Brand href='/'>
+            <img
+              src='/img/tank-icon.jpg'
+              alt=''
+              width='50'
+              style={{ borderRadius: '100%', marginRight: '.5em' }}
+            />
+            <strong>Tankvana</strong>
+          </Navbar.Brand>
+          <Nav className='me-auto ms-2'>
+            <Nav.Link
+              className='link-light'
+              href='/reservations'
+            >
+              Reservations
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link
+              className='link-light'
+              onClick={e => logout(e)}
+            >
+              Logout
+            </Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+    </>
+  );
+};
 
 export default Header;

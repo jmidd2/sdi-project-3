@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { CardGroup } from 'react-bootstrap';
+import { CardGroup, Col } from 'react-bootstrap';
 import ResCard from '../ResCard/ResCard';
 import { AppContext } from '../AppLayout/AppLayout';
 import { useNavigate } from 'react-router-dom';
@@ -32,9 +32,8 @@ const ReservationList = () => {
         },
       });
       let data = await response.json();
-      console.log(data);
-      setReservations(data);
 
+      setReservations(data);
       setRefresh(false);
     };
     if (refresh) {
@@ -45,26 +44,30 @@ const ReservationList = () => {
 
   return (
     <div className='reservation-list'>
-      <CardGroup>
+      <CardGroup
+        xs={1}
+        md={2}
+        className='g-4'
+      >
         {reservations?.map(reservation => (
-          <ResCard
-            start_date={reservation?.start_date}
-            end_date={reservation?.end_date}
-            location={{
-              city: reservation?.city,
-              country: reservation?.country,
-              state: reservation?.state,
-            }}
-            vehicleInfo={{
-              model: reservation?.model,
-              price: reservation?.base_price,
-            }}
-            reservation={reservation}
-            token={token}
-            setReservations={setReservations}
-            setRefresh={setRefresh}
-            key={reservation.contract_id}
-          />
+          <Col key={reservation.contract_id}>
+            <ResCard
+              start_date={reservation?.start_date}
+              end_date={reservation?.end_date}
+              location={{
+                city: reservation?.city,
+                country: reservation?.country,
+                state: reservation?.state,
+              }}
+              vehicleInfo={{
+                model: reservation?.model,
+                price: reservation?.base_price,
+              }}
+              reservation={reservation}
+              token={token}
+              setRefresh={setRefresh}
+            />
+          </Col>
         ))}
       </CardGroup>
     </div>

@@ -19,9 +19,7 @@ const AppLayout = () => {
   useEffect(() => {
     if (isLoggedIn === false) {
       // delete username and token cookies
-      // document.cookie = `token=;Max-Age=`
       document.cookie = 'token=; Max-Age=-99999999;';
-      // document.cookie = 'username' + '=; Max-Age=-99999999;'
     }
   }, [isLoggedIn]);
 

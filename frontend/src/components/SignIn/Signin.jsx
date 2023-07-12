@@ -39,7 +39,6 @@ const SignIn = () => {
     } else {
       let token = await response.json();
       // store token in cookie
-      // document.cookie = `username=${username.current.value}; max-age=3600`;
       document.cookie = `token=${token}; max-age=3600`;
       // set some state for logged in to true?
       setIsLoggedIn(true);
@@ -49,8 +48,6 @@ const SignIn = () => {
   };
 
   const handleSignup = () => {
-    //   setUsername(document.getElementById('un').value)
-    //   setPassword(document.getElementById('pw').value)
     navigate('/signup');
   };
 
@@ -62,10 +59,10 @@ const SignIn = () => {
         <Card className='mb-5 d-flex flex-column align-items-left rounded bg-secondary bg-white shadow-lg w-25 p-2 m-3'>
           <form onSubmit={handleLogin}>
             <h1 class='h3 mb-3 fw-normal'>Please Sign In</h1>
-            <div className='row justify-content-center form-floating mb-2 w-100 px-3'>
+            <div className='row justify-content-center mb-2 w-100 px-3'>
               <input
                 ref={username}
-                className=''
+                className='form-control'
                 type='text'
                 placeholder='Username'
                 id='un'
@@ -74,28 +71,28 @@ const SignIn = () => {
             <div className='row justify-content-center mb-2 w-100 px-3'>
               <input
                 ref={password}
-                className='mb-3'
+                className='mb-3 form-control'
                 type='password'
                 placeholder='Password'
                 id='pw'
               />
             </div>
-            <div className='d-flex row justify-content-around'>
+            <div className='d-grid gap-w d-md-flex justify-content-md-center'>
               <Button
-                className='w-25 mh-100'
+                className='me-md-2'
                 variant='success'
                 type='submit'
               >
                 Log In
-              </Button>{' '}
+              </Button>
               {/* On click check un/pw against DB and set session data*/}
               <Button
-                className='w-25'
+                className=''
                 variant='success'
                 onClick={() => handleSignup()}
               >
                 Sign Up
-              </Button>{' '}
+              </Button>
               {/* On click navigate to Sign Up page*/}
             </div>
           </form>

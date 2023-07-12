@@ -1,21 +1,46 @@
-.SignupContainer {
-    border: 1px solid red;
+.headerContainer {
     display: grid;
-    // grid-template-columns: 1fr;
     justify-content: center;
-    margin: 1em;
-    
+    text-align: center;
+    margin-top: 3.5em;
+}
 
+h1 {
+    font-family: 'sans-serif';
+    padding: .2em;
+}
+
+.header1 {
+    background-color: #0056B9;
+    height: 100%;
+    color: white;
+}
+.header2 {
+    background-color: #FFD800;
+    min-height: 100%;
+    margin: none;
+}
+
+.mainContainer {
+    display: grid;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+.signup {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    justify-self: center;
+    display: grid;
+    justify-content: center;
+    padding: 1em;
+    grid-gap: .5em .5em;
 }
 
 .username {
-
+    padding: .2em;
 }
 
 .password {
-
-}
-
-.button {
-
+    padding: .2em;
 }
