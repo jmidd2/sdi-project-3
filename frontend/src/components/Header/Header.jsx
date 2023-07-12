@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../AppLayout/AppLayout';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+// import jwt_decode from "jwt-decode";
 
 import './Header.scss';
 
@@ -57,6 +58,7 @@ const Header = () => {
             >
               Logout
             </Nav.Link>
+            
           </Nav>
         </Container>
       </Navbar>

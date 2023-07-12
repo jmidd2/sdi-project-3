@@ -53,11 +53,7 @@ const ReservationList = () => {
           No Reservations available. <Link to='/rental-details'>Make one!</Link>
         </p>
       )}
-      <CardGroup
-        xs={1}
-        md={2}
-        className='g-4'
-      >
+      <div className='g-4 row'>
         {reservations?.map(reservation => (
           <Col key={reservation.contract_id}>
             <ResCard
@@ -78,7 +74,7 @@ const ReservationList = () => {
             />
           </Col>
         ))}
-      </CardGroup>
+      </div>
     </div>
   );
 };
